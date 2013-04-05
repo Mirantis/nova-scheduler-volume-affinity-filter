@@ -1,0 +1,6 @@
+[gerrit]
+host=gerrit.mirantis.com
+port=29418
+project=openstack/volume-affinity-filter.git
+defaultbranch=master
+defaultremote=gerrit-mirantis
