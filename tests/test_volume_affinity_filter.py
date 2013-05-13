@@ -17,8 +17,8 @@ Tests For Volume Affinity Filter For Nova-Scheduler.
 
 import mox
 
+from cinderclinet import exceptions as client_exceptions
 from nova import context
-from nova import exception
 from nova.openstack.common import importutils
 from nova.scheduler import filters
 from nova import test
@@ -71,8 +71,8 @@ class HostFiltersTestCase(test.TestCase):
                              'scheduler_hints': {
                                  'same_host_volume_id': 'WRONG_ID', }}
         self.mox.StubOutWithMock(nova.volume.cinder, 'cinderclient')
-        self.mockObj.volumes.get('WRONG_ID').AndRaise(exception.VolumeNotFound(
-            volume_id='WORNG_ID'))
+        self.mockObj.volumes.get('WRONG_ID').AndRaise(
+            client_exceptions.NotFound(volume_id='WORNG_ID'))
         nova.volume.cinder.cinderclient(self.context).AndReturn(self.mockObj)
         self.mox.ReplayAll()
         self.assertFalse(self.filter_instance.host_passes

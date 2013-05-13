@@ -18,6 +18,7 @@ This filter selects only that host to which specified volume
 belongs. Other hosts get rejected.
 """
 
+from cinderclient import exceptions as client_exceptions
 from nova import exception
 from nova.openstack.common import log as logging
 from nova.scheduler import filters
@@ -42,7 +43,7 @@ class SameWithVolumeHostFilter(filters.BaseHostFilter):
                 the_brick = brick.cinderclient(context).volumes.get(volume_id)
                 vol_host = getattr(the_brick, 'os-vol-host-attr:host', None)
                 return host == vol_host
-            except exception.VolumeNotFound:
+            except client_exceptions.NotFound:
                 LOG.warning('volume with provided id ("%s") was not found',
                             volume_id)
                 return False

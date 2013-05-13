@@ -1,2 +1,3 @@
 git+git://github.com/openstack/nova.git@stable/grizzly#egg=nova
+git+git://github.com/openstack/python-cinderclient.git@stable/grizzly#egg=cinderclient
 fixtures

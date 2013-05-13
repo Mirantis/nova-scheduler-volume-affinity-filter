@@ -8,5 +8,5 @@ setup(
     author_email='aovchinnikov@mirantis.com',
     packages=['volume_affinity_filter'],
     description='Volume Affinity Filter for Openstack Nova scheduler',
-    long_description=open('README.txt').read(),
+    long_description=open('README.rst').read(),
 )
